@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cabin Focus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="map"></div>
+
+<!-- ============ SETUP ============ -->
+<aside id="setup">
+  <div class="brand">
+    <div>
+      <h1>Cabin <i>Focus</i></h1>
+    </div>
+    <button class="icon-btn" id="openLog">Logbook</button>
+  </div>
+  <div class="setup-body">
+    <div class="field"><span class="lbl">Purpose of travel</span>
+      <div class="add-row"><input id="pPurpose" maxlength="48" placeholder="What are you focusing on?"><button class="icon-btn" id="addPurpose">+ Save</button></div>
+      <div class="chips" id="purposeChips"></div>
+    </div>
+    <label class="field"><span class="lbl">Departing from</span>
+      <select id="origin"></select></label>
+    <div>
+      <span class="lbl">Focus length</span>
+      <div class="chips" id="lenChips"></div>
+      <div class="dest-list" id="destList"></div>
+    </div>
+    <div class="toggle-row">
+      <div><b>Flight Attendant</b></div>
+      <button class="switch" id="faSwitch" aria-label="Flight Attendant"></button>
+    </div>
+    <div class="toggle-row">
+      <div><b>Cabin chime</b></div>
+      <button class="switch" id="chimeSwitch" aria-label="Cabin chime"></button>
+    </div>
+  </div>
+  <div class="setup-foot">
+    <div class="summary" id="summary">Choose a destination</div>
+    <button class="btn-gold" id="getTicket" disabled>Get boarding pass</button>
+  </div>
+</aside>
+
+<!-- ============ FLIGHT ============ -->
+<section id="flight" class="hidden">
+  <div class="purpose" id="fPurposeBar"><span class="lbl">Focusing on</span><span class="t" id="fPurpose"></span></div>
+  <div class="seatbelt"><button class="icon-btn" id="fsBtn" style="background:var(--navy-glass)">Full screen</button></div>
+  <div class="hud" id="hud">
+    <div class="hud-top">
+      <div class="ap"><div class="c" id="hFrom"></div><div class="n" id="hFromN"></div></div>
+      <div class="clock"><div class="time" id="hTime">00:00</div><div class="eta" id="hEta"></div></div>
+      <div class="ap r"><div class="c" id="hTo"></div><div class="n" id="hToN"></div></div>
+    </div>
+    <div class="track"><div class="fill" id="hFill"></div>
+      <svg class="pl" id="hPl" viewBox="0 0 64 64"><path fill="currentColor" d="M32 2c2.2 0 3.6 2.4 3.6 5.6V24l22 12.6v5.2L35.6 35v13.4l6.6 5.2V58L32 55l-10.2 3v-4.4l6.6-5.2V35L6.4 41.8v-5.2l22-12.6V7.6C28.4 4.4 29.8 2 32 2z"/></svg>
+    </div>
+    <div class="stats">
+      <div><div class="lbl">Elapsed</div><div class="v" id="sEl"></div></div>
+      <div><div class="lbl">Distance left</div><div class="v" id="sDist"></div></div>
+      <div><div class="lbl">Altitude</div><div class="v" id="sAlt"></div></div>
+      <div><div class="lbl">Ground speed</div><div class="v" id="sSpd"></div></div>
+    </div>
+    <div class="hud-actions">
+      <button class="btn-ghost" id="pauseBtn">Hold</button>
+      <button class="btn-ghost" id="divertBtn">Divert</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOGBOOK ============ -->
+<aside id="logbook">
+  <div class="lb-head"><h2>Flight Logbook</h2><button class="icon-btn" id="closeLog">Close</button></div>
+  <div class="lb-stats" id="lbStats"></div>
+  <div class="lb-list" id="lbList"></div>
+  <div class="lb-foot"><button class="icon-btn" id="clearLog">Clear logbook</button></div>
+</aside>
+
+<div id="banner"><div class="ico" id="bIco"></div><div><div class="ttl">Flight Attendant</div><div class="msg" id="bMsg"></div></div><button id="bOk">Thank you</button></div>
+<div id="toast"></div>
+<div id="modalRoot"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
